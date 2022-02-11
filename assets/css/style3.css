@@ -1,0 +1,20 @@
+    .header-me-connecter{
+        display: none;
+    }
+    .header-users-icon{
+        font-size: 25px;
+    }
+
+    footer{
+        background: #000 !important;
+    }
+
+    .couleurJaune{
+        color: #b4a895 !important; 
+    }
+    .couleurBlanche{
+        color: white !important;
+    }
+
+
+    /* parti produict dans le menu2.php */
