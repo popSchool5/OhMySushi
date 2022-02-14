@@ -326,17 +326,17 @@ if (!empty($_SESSION['users'])) {
                                                                     <?= $adressUserSecondaire['phone'] ?><br>
                                                                     <?= $adressUserSecondaire['email'] ?><br>
 
-                                                                    <a href="#" data-toggle="modal" data-target="[data-bg='<?= $adressUserSecondaire['id'] ?>']">Modifier <i class="icon-edit"></i></a>
+                                                                  
                                                                     <a href="./dashboard/deleteAdress.php?id=<?= $adressUserSecondaire['id'] ?>&prio=secondaire">Supprimer <i class="icon-edit"></i></a>
                                                                 </p>
                                                             <?php } else { ?>
                                                                 <h5>Vous n'avez pas d'adresse, ajouter une adresse pour commander</h5>
-                                                                <a href="#" data-toggle="modal" data-target="#exampleModalLong">Ajouter une adresse <i class="icon-edit"></i></a>
+                                                                <a href="#" data-toggle="modal" data-target="#exampleModalLongSecondaire">Ajouter une adresse <i class="icon-edit"></i></a>
                                                             <?php } ?>
                                                         </div><!-- End .card-body -->
 
-                                                        <!-- modal pour ajouter l'adresse principal  -->
-                                                        <div class="modal fade" id="exampleModalLong" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true">
+                                                        <!-- modal pour ajouter l'adresse secondaire  -->
+                                                        <div class="modal fade" id="exampleModalLongSecondaire" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true">
                                                             <div class="modal-dialog" role="document">
 
                                                                 <style>
@@ -348,13 +348,13 @@ if (!empty($_SESSION['users'])) {
 
                                                                 <div class="modal-content p-4">
                                                                     <div class="modal-header">
-                                                                        <h5 class="modal-title" id="exampleModalLongTitle">Votre adresse principal :</h5>
+                                                                        <h5 class="modal-title" id="exampleModalLongTitle">Votre adresse secondaire :</h5>
                                                                         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                                                             <span aria-hidden="true">&times;</span>
                                                                         </button>
                                                                     </div>
                                                                     <div class="modal-body">
-                                                                        <form method="POST" action="./dashboard/editAdress.php?prio=principal">
+                                                                        <form method="POST" action="./dashboard/editAdress.php?prio=secondaire">
                                                                             <input type="hidden" name="id" value="<?= $user['id'] ?>">
                                                                             <div class="form-group">
                                                                                 <label for="name">Intitulé de l'adresse </label>
@@ -370,11 +370,11 @@ if (!empty($_SESSION['users'])) {
                                                                             </div>
                                                                             <div class="form-group">
                                                                                 <label for="postal">Code postal</label>
-                                                                                <input type="number" class="form-control testFon" name="postal" id="postal" required>
+                                                                                <input type="number" class="form-control testFon" name="postal" id="postalSecondaire" required>
                                                                             </div>
                                                                             <div class="form-group">
                                                                                 <label for="city">Ville</label><br>
-                                                                                <select class="form-control" name="city" id="city">
+                                                                                <select class="form-control" name="city" id="citySecondaire">
 
                                                                                 </select>
                                                                             </div>
@@ -530,7 +530,7 @@ if (!empty($_SESSION['users'])) {
         <!-- Main JS File -->
         <script src="assets/js/main.js"></script>
         <script src="./assets/js/geoapi.js"></script>
-
+        <script src="./assets/js/geoapi2.js"></script>
     </body>
 
 

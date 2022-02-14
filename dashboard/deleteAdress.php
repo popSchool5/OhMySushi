@@ -10,7 +10,7 @@ if (!empty($_GET['id']) && !empty($_SESSION['users'])) {
             $req->bindValue(":id", $_GET['id'], PDO::PARAM_INT);
             $req->bindValue(":priorite", $_GET['prio'], PDO::PARAM_STR);
             $req->execute();
-            header('location:' . $_SERVER['HTTP_REFERER'] . '?success=deleteAdress');
+            header('location: ../dashboard.php?success=deleteAdress');
 
         } else if(!empty($_GET['prio']) && $_GET['prio'] == "secondaire"){
 
@@ -18,9 +18,9 @@ if (!empty($_GET['id']) && !empty($_SESSION['users'])) {
             $req->bindValue(":id", $_GET['id'], PDO::PARAM_INT);
             $req->bindValue(":priorite", $_GET['prio'], PDO::PARAM_STR);
             $req->execute();
-            header('location:' . $_SERVER['HTTP_REFERER'] . '?success=deleteAdress');
+            header('location: ../dashboard.php?success=deleteAdress');
 
         }else{
-            header('location: dashboard.php');
+            header('location: ../dashboard.php');
         }
 }

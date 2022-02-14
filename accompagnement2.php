@@ -9,7 +9,7 @@ if (isset($_GET['del'])) {
 require('./assets/componants/header.php');
 $promos = promoAafficher();
 $crudIndex = crudIndex();
-// var_dump($crudIndex);
+
 $fermerOuOuvert = magasinFermerOuOuvert();
 
 ?>
@@ -52,18 +52,19 @@ $fermerOuOuvert = magasinFermerOuOuvert();
 
 
                                   
-                                    <form action="bg.php" method="POST">
+                                    <form action="adresseDeFacturation.php" method="POST">
                                     <div class="row">
                                         <h3 class="couleurJaune" style="width: 100%; text-align:center;">Envie d’une sauce ?</h3>
                                     </div>
                                         <style>
                                             .label-for-check ,.couvert {
                                                 border: 1px dotted grey;
-                                                padding: 2rem;
-                                                margin-top: 1rem;
+                                                padding: 2.5rem;
+                                                margin-top: 1.3rem;
                                                 border-radius: 2px;
-                                                min-width: 150px;
+                                                min-width: 190px;
                                                 min-height: 150px;
+                                                text-align: center;
                                             }
                                             .label-for-check img{
                                                
@@ -89,33 +90,33 @@ $fermerOuOuvert = magasinFermerOuOuvert();
                                         </style>
                                         <div class="choixDesSauces">
                                             <div class="sauce">
-                                                <input type="checkbox" class="check-with-label" id="idinput1" />
+                                                <input type="checkbox" name="sauce_sucre" class="check-with-label" id="idinput1" <?php if(!empty($_SESSION["sauce"]) && isset($_SESSION['sauce'])&& $_SESSION['sauce']['sucre'] == true){echo 'checked';} ?> />
                                                 <label class="label-for-check" for="idinput1"> <img src="./iconsauce2.png" class="pb-1" alt="">
                                                     <h6 class="couleurBlanche">Sauce Sucré</h6>
                                                 </label>
                                             </div>
                                             <div class="sauce">
-                                                <input type="checkbox" class="check-with-label" id="idinput" />
+                                                <input type="checkbox" name="sauce_sale" class="check-with-label" id="idinput" <?php if(!empty($_SESSION["sauce"]) && isset($_SESSION['sauce'])&& $_SESSION['sauce']['sale'] == true){echo 'checked';} ?>/>
                                                 <label class="label-for-check" for="idinput"> <img src="./iconsauce2.png" class="pb-1" alt="">
-                                                    <h6 class="couleurBlanche">Sauce Sucré</h6>
+                                                    <h6 class="couleurBlanche">Sauce Salé</h6>
                                                 </label>
                                             </div>
                                             <div class="sauce">
-                                                <input type="checkbox" class="check-with-label" id="idinput2" />
+                                                <input type="checkbox" name="sauce_wasabi" class="check-with-label" id="idinput2" <?php if(!empty($_SESSION["sauce"]) && isset($_SESSION['sauce'])&& $_SESSION['sauce']['wasabi'] == true){echo 'checked';} ?> />
                                                 <label class="label-for-check" for="idinput2"> <img src="./iconsauce2.png" class="pb-1" alt="">
-                                                    <h6 class="couleurBlanche">Sauce Sucré</h6>
+                                                    <h6 class="couleurBlanche">Sauce Wasabi</h6>
                                                 </label>
                                             </div>
                                             <div class="sauce">
-                                                <input type="checkbox" class="check-with-label" id="idinput3" />
+                                                <input type="checkbox" name="sauce_nem" class="check-with-label" id="idinput3" <?php if(!empty($_SESSION["sauce"]) && isset($_SESSION['sauce'])&& $_SESSION['sauce']['nem'] == true){echo 'checked';} ?>/>
                                                 <label class="label-for-check" for="idinput3"> <img src="./iconsauce2.png" class="pb-1" alt="">
-                                                    <h6 class="couleurBlanche">Sauce Sucré</h6>
+                                                    <h6 class="couleurBlanche">Sauce Nem</h6>
                                                 </label>
                                             </div>
                                             <div class="sauce">
-                                                <input type="checkbox" class="check-with-label" id="idinput4" />
+                                                <input type="checkbox" name="sauce_gingembre" class="check-with-label" id="idinput4" <?php if(!empty($_SESSION["sauce"]) && isset($_SESSION['sauce']) && $_SESSION['sauce']['gingembre'] == true){echo 'checked';} ?>/>
                                                 <label class="label-for-check" for="idinput4"> <img src="./iconsauce2.png" class="pb-1" alt="">
-                                                    <h6 class="couleurBlanche">Sauce Sucré</h6>
+                                                    <h6 class="couleurBlanche">Sauce Gingembre</h6>
                                                 </label>
                                             </div>
                                         </div>
@@ -126,11 +127,11 @@ $fermerOuOuvert = magasinFermerOuOuvert();
                                     <div class="choixDesCouverts">
                                        <div class="couvert">
                                            <label  class="couleurBlanche" for="couvertd">Couvert</label>
-                                            <input type="number" value="0" id="couvertd" inputmode="decimal"/>
+                                            <input type="number" name="couvert" value="<?php if(!empty($_SESSION["couvert"]) && isset($_SESSION['couvert']) && ($_SESSION['couvert']['couvert'] > 0) ){echo $_SESSION['couvert']['couvert'] ;}else{echo "0";}?>" id="couvertd" inputmode="decimal"/>
                                        </div>
                                        <div class="couvert">
                                            <label class="couleurBlanche" for="baguette">Baguette</label>
-                                            <input type="number" value="0" id="baguette" inputmode="decimal"/>
+                                            <input type="number" name="baguette" value="<?php if(!empty($_SESSION["couvert"]) && isset($_SESSION['couvert']) && ($_SESSION['couvert']['baguette'] > 0) ){echo $_SESSION['couvert']['baguette'] ;}else{echo "0";}?>" id="baguette" inputmode="decimal"/>
                                        </div>
                                     </div>
                                     <?php } ?>
@@ -537,17 +538,17 @@ $fermerOuOuvert = magasinFermerOuOuvert();
                                         </tbody>
                                     </table><!-- End .table table-summary -->
 
-                                    <!-- <button type="button" data-toggle="modal" data-target="#modalAccompagnement" class="btn btn-outline-primary-2 btn-order btn-block">PROCEDER AU PAIEMENT</button> -->
-
+                              
                                     <?php
                                     if (!empty($_SESSION['panier'])) {
                                         if (!empty($_SESSION['users'])) { ?>
-                                            <button type="submit" class="btn btn-outline-primary-2 btn-order btn-block">PROCEDER AU PAIEMENT</button>
+                                            <button type="submit" class="btn btn-outline-primary-2 btn-order btn-block">Passer à l'adresse de facturation</button>
                                         <?php } else { ?>
-                                            <button type="button" href="#signin-modal" data-toggle="modal" class="btn btn-outline-primary-2 btn-order btn-block">PROCEDER AU PAIEMENT</button>
+                                            <button type="button" href="#signin-modal" data-toggle="modal" class="btn btn-outline-primary-2 btn-order btn-block">Passer à l'adresse de facturation</button>
                                     <?php   }
                                     } ?>
 
+                                  
                                     </form>
 
 

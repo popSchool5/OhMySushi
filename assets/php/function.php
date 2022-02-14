@@ -15,11 +15,21 @@ function viewUser($id)
 function viewFullUserAdresse($id)
 {
     global $bdd;
-    $users = $bdd->prepare('SELECT users.id,users.lastname,users.firstname,users.email,users.password,adress.name,adress.company,adress.address,adress.postal,adress.city,adress.phone,adress.priorite FROM users LEFT JOIN adress ON users.id = adress.id_users WHERE users.id = ?');
+    $users = $bdd->prepare('SELECT users.id,users.lastname,users.firstname,users.email,adress.name,adress.company,adress.address,adress.postal,adress.city,adress.phone,adress.priorite FROM users INNER JOIN adress ON users.id = adress.id_users WHERE users.id = ?');
     $users->execute(array(
         $id
     ));
-    $user = $users->fetch();
+    $user = $users->fetchAll();
+    return $user;
+}
+function voirAdressePrincipal($id,$prio){
+    global $bdd;
+    $users = $bdd->prepare('SELECT users.id,users.lastname,users.firstname,users.email,adress.name,adress.company,adress.address,adress.postal,adress.city,adress.phone,adress.priorite FROM users INNER JOIN adress ON users.id = adress.id_users WHERE users.id = ? AND adress.priorite = ?');
+    $users->execute(array(
+        $id,
+        $prio
+    ));
+    $user = $users->fetchAll();
     return $user;
 }
 function viewFullUserAdressePrincipal($id)
