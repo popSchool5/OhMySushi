@@ -9,7 +9,7 @@
             require('./assets/componants/header.php');
 
 
-            $us = viewFullUserAdresse($_SESSION['users']['id']);
+            $us = viewFullUserAdresse($_SESSION['users']['id'],'principal');
             $art = viewPanierArticle($ids);
 
 

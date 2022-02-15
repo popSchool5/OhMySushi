@@ -5,18 +5,9 @@ require('./assets/php/function.php');
 require('./assets/componants/header.php');
 
 $fermerOuOuvert = magasinFermerOuOuvert();
-$sucre = (isset($_POST['sauce_sucre'])) ? true : false;
-$sale = (isset($_POST['sauce_sale'])) ? true : false;
-$wasabi = (isset($_POST['sauce_wasabi'])) ? true : false;
-$nem = (isset($_POST['sauce_nem'])) ? true : false;
-$gingembre = (isset($_POST['sauce_gingembre'])) ? true : false;
-
-$_SESSION['sauce'] = ["sucre" => $sucre, "sale" => $sale, "wasabi" => $wasabi, "nem" => $nem, "gingembre" => $gingembre, "baguette" => $_POST['baguette'], "couvert" => $_POST['couvert']];
-$_SESSION['couvert'] = ["couvert" => $_POST['couvert'], "baguette" => $_POST['baguette']];
 
 $adressePrincipal = voirAdressePrincipal($_SESSION['users']['id'], 'principal');
 $adresseSecondaire = voirAdressePrincipal($_SESSION['users']['id'], 'secondaire');
-
 
 ?>
 
@@ -64,6 +55,8 @@ $adresseSecondaire = voirAdressePrincipal($_SESSION['users']['id'], 'secondaire'
                                                 min-width: 320px;
                                                 min-height: 150px;
                                                 text-align: center;
+                                                background-color: rgb(23 23 23 / 81%);
+
                                             }
 
                                             .label-for-check img {
@@ -87,10 +80,11 @@ $adresseSecondaire = voirAdressePrincipal($_SESSION['users']['id'], 'secondaire'
                                                
                                             }
 
-                                            .fas {
+                                            .fas{
                                                 font-size: 30px;
 
                                             }
+
                                         </style>
 
                                         <div class="choixDeLadresse">
@@ -98,7 +92,7 @@ $adresseSecondaire = voirAdressePrincipal($_SESSION['users']['id'], 'secondaire'
                                                 <div class="sauce">
                                                     <input type="radio" name="adresseDeLivraisonChoisie" class="check-with-label" id="idinput1" />
                                                     <label class="label-for-check" for="idinput1">
-                                                        <h6 class="couleurBlanche"><i class="fas fa-address-card"></i></h6>
+                                                        <h6 class="couleurBlanche"><i class="fas fa-map-marker-alt"></i></h6>
                                                         <?php foreach($adressePrincipal as $ap){ ?>
                                                            <p  class="couleurBlanche" ><?= $ap['name']; ?> </p> 
                                                            <p class="couleurBlanche" > <?= $ap['company']; ?> </p> 
@@ -114,7 +108,7 @@ $adresseSecondaire = voirAdressePrincipal($_SESSION['users']['id'], 'secondaire'
                                                 <div class="sauce">
                                                     <input type="radio" name="adresseDeLivraisonChoisie" class="check-with-label" id="idinput" />
                                                     <label class="label-for-check" for="idinput">
-                                                    <h6 class="couleurBlanche"><i class="fas fa-address-card"></i></h6>
+                                                    <h6 class="couleurBlanche"><i class="fas fa-map-marker-alt"></i></h6>
                                                         <?php foreach($adresseSecondaire as $as){ ?>
                                                            <p  class="couleurBlanche" ><?= $as['name']; ?> </p> 
                                                            <p class="couleurBlanche" > <?= $as['company']; ?> </p> 

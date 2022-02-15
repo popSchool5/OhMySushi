@@ -52,7 +52,7 @@ $fermerOuOuvert = magasinFermerOuOuvert();
 
 
                                   
-                                    <form action="adresseDeFacturation.php" method="POST">
+                                    <form action="passage.php" method="POST">
                                     <div class="row">
                                         <h3 class="couleurJaune" style="width: 100%; text-align:center;">Envie d’une sauce ?</h3>
                                     </div>
