@@ -539,14 +539,10 @@ $fermerOuOuvert = magasinFermerOuOuvert();
                                     </table><!-- End .table table-summary -->
 
                               
-                                    <?php
-                                    if (!empty($_SESSION['panier'])) {
-                                        if (!empty($_SESSION['users'])) { ?>
+                                   
+                                   
                                             <button type="submit" class="btn btn-outline-primary-2 btn-order btn-block">Passer à l'adresse de facturation</button>
-                                        <?php } else { ?>
-                                            <button type="button" href="#signin-modal" data-toggle="modal" class="btn btn-outline-primary-2 btn-order btn-block">Passer à l'adresse de facturation</button>
-                                    <?php   }
-                                    } ?>
+                                       
 
                                   
                                     </form>

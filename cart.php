@@ -6,8 +6,7 @@ if (isset($_GET['del'])) {
     $panier->del($_GET['del']);
 }
 require('./assets/componants/header.php');
-var_dump($_SESSION);
-var_dump($panier); 
+
 ?>
 
 <body>

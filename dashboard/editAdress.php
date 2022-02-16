@@ -17,7 +17,13 @@ if (!empty($_SESSION['users'])) {
                 'priorite' => $_GET['prio'],
                 'id_users' => $_POST['id']
             ));
-            header('location: ../dashboard.php?success=AdressAjouter');
+            if($_POST['chemin'] == "adresseFacturation" && !empty($_POST['chemin'])){
+                header('location: ../adresseDeFacturation.php?success=AdressAjouter');
+
+            }else{
+                header('location: ../dashboard.php?success=AdressAjouter');
+ 
+            }
             
         } elseif (!empty($_GET) && $_GET['prio'] === 'secondaire') {
             $req = $bdd->prepare('INSERT INTO adress(name,company,address,postal,city,phone,priorite,id_users)VALUES (:name,:company,:address,:postal,:city,:phone,:priorite,:id_users)');

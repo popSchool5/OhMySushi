@@ -28,8 +28,8 @@ $adresseSecondaire = voirAdressePrincipal($_SESSION['users']['id'], 'secondaire'
                         <li class="breadcrumb-item"><a href="cart.php">Panier</a></li>
 
                         <li class="breadcrumb-item " aria-current="page">Accompagnement</li>
-                        <li class="breadcrumb-item active couleurJaune" aria-current="page">Adresse</li>
-                        <li class="breadcrumb-item" aria-current="page">Mode de livraison</li>
+                        <li class="breadcrumb-item" aria-current="page">Adresse</li>
+                        <li class="breadcrumb-item  active couleurJaune" aria-current="page">Mode de livraison</li>
                         <li class="breadcrumb-item" aria-current="page">Paiement</li>
                     </ol>
                 </div><!-- End .container -->

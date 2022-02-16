@@ -5,7 +5,6 @@ require('../assets/php/co_bdd.php');
 if (!empty($_GET['sess'] == "insc")) {
     if (!empty($_POST)) {
 
-
         $req = $bdd->prepare('SELECT * FROM users WHERE email = ?');
         $req->execute(array($_POST['register-email']));
 
@@ -247,42 +246,46 @@ if (!empty($_GET['sess'] == "insc")) {
 
 
 
-                    $mime_boundary = "Oh My Sushi " . md5(time());
-                    $entetes = "From: Oh My Sushi  <services@ohmysushi.org>\n";
-                    $entetes .= "Mime-Version: 1.0\n";
-                    $entetes .=
-                        "Content-Type: multipart/alternative; boundary=\"$mime_boundary\"\n";
-                    $entetes .= "X-Sender: <www.ohmysushi.com>\n";
-                    $entetes .= "X-Mailer: PHP/" . phpversion() . " \n";
-                    $entetes .= "X-Priority: 3 (normal) \n";
-                    $entetes .= "X-auth-smtp-user: services@ohmysushi.org\n";
-                    $entetes .= "X-abuse-contact: abuse@ohmysushi.org\n";
-                    $entetes .= "Importance: Normal\n";
-                    $entetes .= "Reply-to: services@ohmysushi.org\n";
+                $mime_boundary = "Oh My Sushi " . md5(time());
+                $entetes = "From: Oh My Sushi  <services@ohmysushi.org>\n";
+                $entetes .= "Mime-Version: 1.0\n";
+                $entetes .=
+                    "Content-Type: multipart/alternative; boundary=\"$mime_boundary\"\n";
+                $entetes .= "X-Sender: <www.ohmysushi.com>\n";
+                $entetes .= "X-Mailer: PHP/" . phpversion() . " \n";
+                $entetes .= "X-Priority: 3 (normal) \n";
+                $entetes .= "X-auth-smtp-user: services@ohmysushi.org\n";
+                $entetes .= "X-abuse-contact: abuse@ohmysushi.org\n";
+                $entetes .= "Importance: Normal\n";
+                $entetes .= "Reply-to: services@ohmysushi.org\n";
 
 
-                    // header texte plain
-                    $mess = "--$mime_boundary\n";
-                    $mess .= "Content-Type: text/plain; charset=ISO-8859-1\n";
-                    $mess .= "Content-Transfer-Encoding: 8bit\n\n";
-                    $mess .= $texte_plain;
+                // header texte plain
+                $mess = "--$mime_boundary\n";
+                $mess .= "Content-Type: text/plain; charset=ISO-8859-1\n";
+                $mess .= "Content-Transfer-Encoding: 8bit\n\n";
+                $mess .= $texte_plain;
 
 
-                    // header texte en html
+                // header texte en html
 
-                    $mess .= "--$mime_boundary\n";
-                    $mess .= "Content-Type: text/html; charset=ISO-8859-1\n";
-                    $mess .= "Content-Transfer-Encoding: 8bit\n\n";
-                    $mess .= $texte_html;
+                $mess .= "--$mime_boundary\n";
+                $mess .= "Content-Type: text/html; charset=ISO-8859-1\n";
+                $mess .= "Content-Transfer-Encoding: 8bit\n\n";
+                $mess .= $texte_html;
 
-                    // envoi du mail HTML
-                    $date_mail = date("d-m-Y"); // la date (optionnelle)
-                    mail($email, "titre - $date_mail", $mess, $entetes);
+                // envoi du mail HTML
+                $date_mail = date("d-m-Y"); // la date (optionnelle)
+                mail($email, "titre - $date_mail", $mess, $entetes);
 
 
+                if(!empty($_POST['chemin']) && $_POST['chemin'] == "tunnel"){
+                    header('location: ../adresseDeFacturation.php?success=compteCree');
 
+                }else{
                     header('location: ../index.php?success=compteCree');
                 }
+            }
 
 
 
@@ -308,10 +311,15 @@ if (!empty($_GET['sess'] == "insc")) {
                 $_SESSION['users']['email']   = $user['email'];
 
 
+                if(!empty($_POST['chemin']) && $_POST['chemin'] == "tunnel"){
+                    header('location: ../adresseDeFacturation.php?success=bienvenue');
 
+                }else{
+                    header('location:   ../index.php?success=bienvenue');
 
-                header('location:   ../index.php?success=bienvenue');
+                }
 
+            
                 exit();
             }
         }
