@@ -40,8 +40,8 @@ $fermerOuOuvert = magasinFermerOuOuvert();
                                         <div class="col-md-10 col-lg-9 col-xl-8">
                                             <div class="row no-gutters flex-column flex-sm-row align-items-sm-center">
                                                 <div class="col">
-                                                    <h3 class="cta-title text-white"><?= htmlspecialchars($promo['text']); ?></h3><!-- End .cta-title -->
-                                                    <p class="cta-desc text-white"><?= htmlspecialchars($promo['name']); ?></p><!-- End .cta-desc -->
+                                                    <h3 class="cta-title text-white testshadow"><?= htmlspecialchars($promo['text']); ?></h3><!-- End .cta-title -->
+                                                    <p class="cta-desc text-white testshadow"><?= htmlspecialchars($promo['name']); ?></p><!-- End .cta-desc -->
                                                 </div><!-- End .col -->
 
                                                 <div class="col-auto">
@@ -79,7 +79,7 @@ $fermerOuOuvert = magasinFermerOuOuvert();
                                             }
                                         </style>
                                         <div class="intro-content">
-                                            <h3 class="intro-subtitle ">Nouveautées</h3><!-- End .h3 intro-subtitle -->
+                                            <h3 class="intro-subtitle .testshadow">Nouveautées</h3><!-- End .h3 intro-subtitle -->
                                             <h1 class="intro-title testshadow ">Découvrez nos <br>nouveautées</h1><!-- End .intro-title -->
 
                                             <a href="menu.php" class="btn btn-outline-white">
@@ -99,7 +99,7 @@ $fermerOuOuvert = magasinFermerOuOuvert();
 
                                         <div class="intro-content">
                                             <h3 class="intro-subtitle"></h3><!-- End .h3 intro-subtitle -->
-                                            <h1 class="intro-title">Nos sushi <br> du moment</h1><!-- End .intro-title -->
+                                            <h1 class="intro-title testshadow">Nos sushi <br> du moment</h1><!-- End .intro-title -->
 
                                             <a href="menu.php" class="btn btn-outline-white">
                                                 <span>Voir le menu</span>
@@ -118,7 +118,7 @@ $fermerOuOuvert = magasinFermerOuOuvert();
 
                                         <div class="intro-content">
                                             <h3 class="intro-subtitle"></h3><!-- End .h3 intro-subtitle -->
-                                            <h1 class="intro-title">Nos pokes à <br>partager</h1><!-- End .intro-title -->
+                                            <h1 class="intro-title testshadow">Nos pokes à <br>partager</h1><!-- End .intro-title -->
 
                                             <a href="menu.php" class="btn btn-outline-white">
                                                 <span>Voir le menu</span>
@@ -142,8 +142,8 @@ $fermerOuOuvert = magasinFermerOuOuvert();
 
                                             <div class="banner-content">
                                                 <h4 class="banner-subtitle text-darkwhite"><a href="#">Actualités</a></h4><!-- End .banner-subtitle -->
-                                                <h3 class="banner-title text-white "><a href="#">Découvrez nos <br>Actualités</a></h3><!-- End .banner-title -->
-                                                <a href="actualites.php" class="btn btn-outline-white banner-link">Voir nos actu<i class="icon-long-arrow-right"></i></a>
+                                                <h3 class="banner-title text-white "><a class="testshadow" href="#">Découvrez nos <br>Actualités</a></h3><!-- End .banner-title -->
+                                                <a href="actualites.php" class="btn testshadow btn-outline-white banner-link">Voir nos actu<i class="icon-long-arrow-right"></i></a>
                                             </div><!-- End .banner-content -->
                                         </div><!-- End .banner -->
                                     </div><!-- End .col-md-6 col-lg-12 -->
@@ -220,6 +220,8 @@ $fermerOuOuvert = magasinFermerOuOuvert();
                     </div><!-- End .container -->
                 </div><!-- End .container -->
             </div><!-- End .bg-lighter -->
+
+
             <style>
                 .bannierPartiUne {
                     max-height: 590px;
@@ -240,9 +242,9 @@ $fermerOuOuvert = magasinFermerOuOuvert();
 
                             <div class="banner-content">
                                 <h4 class="banner-subtitle text-primary">Nouveautés</h4><!-- End .banner-subtitle -->
-                                <h3 class="banner-title text-white">Nouvelles <br>créations.</h3>
+                                <h3 class="banner-title text-white testshadow">Nouvelles <br>créations.</h3>
                                 <!-- End .banner-title -->
-                                <p class="d-none d-lg-block couleurBlanche">Aussi savoureuses que généreuse, à découvrir sans plus attendre!</p>
+                                <p class="d-none d-lg-block couleurBlanche testshadow">Aussi savoureuses que généreuse, à découvrir sans plus attendre!</p>
 
                                 <a href="#" class="btn btn-primary btn-rounded"><span>Je découvre</span><i class="icon-long-arrow-right"></i></a>
                             </div><!-- End .banner-content -->
@@ -258,8 +260,6 @@ $fermerOuOuvert = magasinFermerOuOuvert();
             <div class="container mb-4 mt-4">
                 <div class="heading mb-4">
                     <h2 class="title couleurJaune">Découvrez nos nouveautés :</h2><!-- End .title -->
-
-
                 </div><!-- End .heading -->
 
                 <div class="tab-content tab-content-carousel">
@@ -297,7 +297,7 @@ $fermerOuOuvert = magasinFermerOuOuvert();
                                 <div class="product product-7 text-center">
                                     <figure class="product-media">
                                         <a href="./product.php?id=<?= $nouveautee['id'] ?>">
-                                            <img src="./sysadmin/html/assets/uploads/petite<?= $nouveautee['image'] ?>" alt="Product image" class="product-image">
+                                            <img src="./sysadmin/html/assets/uploads/<?= $nouveautee['image'] ?>" alt="Product image" class="product-image">
                                             <span class="product-label label-sale">Nouveautées</span>
                                         </a>
 
@@ -336,17 +336,17 @@ $fermerOuOuvert = magasinFermerOuOuvert();
                                             <div class="product-action product-desktop-version">
 
                                                 <a href="./panier/addpanier.php?id=<?= $nouveautee['id'] ?>" data-id="<?= $nouveautee['id'] ?>" class="btn-product addPanier btn-cart"><span class="compteParProduit"><?php
-                                                                                                                                                                                                                                                        if (!empty($_SESSION['panier'][$nouveautee['id']])) {
-                                                                                                                                                                                                                                                            echo  $_SESSION['panier'][$nouveautee['id']];
-                                                                                                                                                                                                                                                        }
-                                                                                                                                                                                                                                                        ?>
+                                                                                                                                                                                                                        if (!empty($_SESSION['panier'][$nouveautee['id']])) {
+                                                                                                                                                                                                                            echo  $_SESSION['panier'][$nouveautee['id']];
+                                                                                                                                                                                                                        }
+                                                                                                                                                                                                                        ?>
                                                     </span></a>
                                             </div><!-- End .product-action -->
                                         <?php } ?>
                                     </figure><!-- End .product-media -->
                                     <?php if ($fermerOuOuvert['valeur'] == "ouvert") { ?>
                                         <div class="couleurJaune product-mobile-version w-100">
-                                            <a href="./panier/addpanier.php?id=<?= $nouveautee['id'] ?>"  data-id="<?= $nouveautee['id'] ?>"  class="btn-product addPanier btn-cart">
+                                            <a href="./panier/addpanier.php?id=<?= $nouveautee['id'] ?>" data-id="<?= $nouveautee['id'] ?>" class="btn-product addPanier btn-cart">
                                                 <span class="compteParProduit"><?php
                                                                                 if (!empty($_SESSION['panier'][$nouveautee['id']])) {
                                                                                     echo  $_SESSION['panier'][$nouveautee['id']];
@@ -391,7 +391,7 @@ $fermerOuOuvert = magasinFermerOuOuvert();
 
             <div class="mb-5"></div><!-- End .mb-6 -->
 
-      
+
 
             <!-- SECTION OU IL PEUT MODIFIER AVEC LA SECTION DE BASE SI IL NYA RIEN -->
             <?php if (empty($crudIndex)) { ?>
@@ -422,15 +422,13 @@ $fermerOuOuvert = magasinFermerOuOuvert();
 
                 <!-- menu avec quelque poke -->
                 <div class="container mb-4 mt-4">
-                    <div class="heading mb-4">
-                        <h2 class="title couleurJaune">Découvrez nos pokes :</h2><!-- End .title -->
+                <div class="heading mb-4">
+                    <h2 class="title couleurJaune">Découvrez nos nouveautés :</h2><!-- End .title -->
+                </div><!-- End .heading -->
 
-
-                    </div><!-- End .heading -->
-
-                    <div class="tab-content tab-content-carousel">
-                        <div class="tab-pane p-0 fade show active" id="trending-all-tab" role="tabpanel" aria-labelledby="trending-all-link">
-                            <div class="owl-carousel owl-simple carousel-equal-height carousel-with-shadow" data-toggle="owl" data-owl-options='{
+                <div class="tab-content tab-content-carousel">
+                    <div class="tab-pane p-0 fade show active" id="trending-all-tab" role="tabpanel" aria-labelledby="trending-all-link">
+                        <div class="owl-carousel owl-simple carousel-equal-height carousel-with-shadow" data-toggle="owl" data-owl-options='{
                                 "nav": false, 
                                 "dots": true,
                                 "margin": 20,
@@ -455,59 +453,106 @@ $fermerOuOuvert = magasinFermerOuOuvert();
                                     }
                                 }
                             }'>
-                                <?php
-                                $decouvrezSushi = viewIndexMenuPartiSushi();
-                                foreach ($decouvrezSushi as $nosSushiIndex) { ?>
-                                    <div class="product product-7 text-center">
-                                        <figure class="product-media">
-                                            <a href="./product.php?id=<?= $nosSushiIndex['id'] ?>">
-                                                <img src=" ./sysadmin/html/assets/uploads/petite<?= $nosSushiIndex['image'] ?>" alt="Product image" class="product-image">
-                                                <!-- <span class="product-label label-sale">Nouveautées</span> -->
-                                            </a>
+                            <?php
+                            $nouveautees = viewIndexMenuNew();
 
-                                            <!-- <div class="product-action-vertical">
-                                                <a href="#" class="btn-product-icon btn-wishlist btn-expandable"><span>ajouter au favoris</span></a>
-                                            </div>End .product-action-vertical -->
-                                            <?php if ($fermerOuOuvert['valeur'] == "ouvert") { ?>
+                            foreach ($nouveautees as $nouveautee) {
+                            ?>
+                                <div class="product product-7 text-center">
+                                    <figure class="product-media">
+                                        <a href="./product.php?id=<?= $nouveautee['id'] ?>">
+                                            <img src="./sysadmin/html/assets/uploads/<?= $nouveautee['image'] ?>" alt="Product image" class="product-image">
+                                            <span class="product-label label-sale">Nouveautées</span>
+                                        </a>
 
-                                                <div class="product-action">
-                                                    <a href="./panier/addpanier.php?id=<?= $nosSushiIndex['id'] ?>" class="btn-product addPanier btn-cart"><span>ajouter au panier</span></a>
-                                                </div><!-- End .product-action -->
-                                            <?php } ?>
-                                        </figure><!-- End .product-media -->
+                                        <!-- <div class="product-action-vertical">
+                                            <a href="#" class="btn-product-icon btn-wishlist btn-expandable"><span>ajouter au favoris</span></a>
+                                        </div>End .product-action-vertical -->
+                                        <style>
+                                            @media (max-width: 1024px) {
+                                                .product-desktop-version {
+                                                    display: none;
+                                                }
 
-                                        <div class="product-body">
-                                            <div class="product-cat">
-                                                <a href="#"><?= $nosSushiIndex['label'] ?></a>
-                                            </div><!-- End .product-cat -->
-                                            <h3 class="product-title couleurJaune"><a href="./product.php?id=<?= $nosSushiIndex['id'] ?>"><?= $nosSushiIndex['name'] ?></a></h3>
-                                            <!-- End .product-title -->
-                                            <div class="product-price couleurBlanche">
-                                                <?= $nosSushiIndex['price'] ?> €
-                                            </div><!-- End .product-price -->
+                                                .product-mobile-version {
+
+                                                    background-color: #363636 !important;
+                                                }
+
+                                                .product-mobile-version .btn-product {
+
+                                                    background-color: #0F0F10 !important;
+                                                    border-bottom: .1rem solid #07080D !important;
+                                                }
+                                            }
+
+                                            @media (min-width: 1024px) {
+                                                .product-mobile-version {
+                                                    display: none;
+
+                                                }
+                                            }
+                                        </style>
 
 
-                                        </div><!-- End .product-body -->
-                                    </div><!-- End .product -->
-                                <?php
-                                }
-                                ?>
+                                        <?php if ($fermerOuOuvert['valeur'] == "ouvert") { ?>
+
+                                            <div class="product-action product-desktop-version">
+
+                                                <a href="./panier/addpanier.php?id=<?= $nouveautee['id'] ?>" data-id="<?= $nouveautee['id'] ?>" class="btn-product addPanier btn-cart"><span class="compteParProduit"><?php
+                                                                                                                                                                                                                        if (!empty($_SESSION['panier'][$nouveautee['id']])) {
+                                                                                                                                                                                                                            echo  $_SESSION['panier'][$nouveautee['id']];
+                                                                                                                                                                                                                        }
+                                                                                                                                                                                                                        ?>
+                                                    </span></a>
+                                            </div><!-- End .product-action -->
+                                        <?php } ?>
+                                    </figure><!-- End .product-media -->
+                                    <?php if ($fermerOuOuvert['valeur'] == "ouvert") { ?>
+                                        <div class="couleurJaune product-mobile-version w-100">
+                                            <a href="./panier/addpanier.php?id=<?= $nouveautee['id'] ?>" data-id="<?= $nouveautee['id'] ?>" class="btn-product addPanier btn-cart">
+                                                <span class="compteParProduit"><?php
+                                                                                if (!empty($_SESSION['panier'][$nouveautee['id']])) {
+                                                                                    echo  $_SESSION['panier'][$nouveautee['id']];
+                                                                                }
+                                                                                ?>
+                                                </span></a>
+
+                                        </div>
+                                    <?php } ?>
+                                    <div class="product-body">
+
+                                        <div class="product-cat">
+                                            <a href="#" class="couleurJaune"><?= $nouveautee['label'] ?></a>
+                                        </div><!-- End .product-cat -->
+                                        <h3 class="product-title couleurBlanche"><a href="./product.php?id=<?= $nouveautee['id'] ?>"><?= $nouveautee['name'] ?></a></h3>
+                                        <!-- End .product-title -->
+                                        <div class="product-price">
+                                            <?= $nouveautee['price'] ?> €
+                                        </div><!-- End .product-price -->
 
 
-                            </div><!-- End .owl-carousel -->
-                        </div><!-- .End .tab-pane -->
+                                    </div><!-- End .product-body -->
+                                </div><!-- End .product -->
+                            <?php
+                            }
+                            ?>
 
-                    </div><!-- End .tab-content -->
-                    <div class="text-center mt-2 mb-3">
-                        <div class="text-center btn-wrap">
-                            <a href="menu.php" class="btn btn-outline-darker btn-more"><span class="couleurBlanche">VOIR NOTRE MENU</span><i class="icon-long-arrow-right"></i></a>
 
-                        </div><!-- End .btn-wrap -->
-                    </div><!-- End .col-md-4 col-lg-2 -->
-                </div>
+                        </div><!-- End .owl-carousel -->
+                    </div><!-- .End .tab-pane -->
+
+                </div><!-- End .tab-content -->
+                <div class="text-center mt-2 mb-3">
+                    <div class="text-center btn-wrap">
+                        <a href="menu.php" class="btn btn-outline-darker btn-more"><span class="couleurBlanche">VOIR NOTRE MENU</span><i class="icon-long-arrow-right couleurJaune"></i></a>
+
+                    </div><!-- End .btn-wrap -->
+                </div><!-- End .col-md-4 col-lg-2 -->
+            </div>
                 <!-- fin menu avec quelque poke -->
                 <?php } else {
-                var_dump($crudIndex);
+
                 foreach ($crudIndex as $indexCrud) {
                 ?>
 
@@ -522,10 +567,10 @@ $fermerOuOuvert = magasinFermerOuOuvert();
                                     </a>
 
                                     <div class="banner-content">
-                                        <h4 class="banner-subtitle text-primary">Nos pokes</h4><!-- End .banner-subtitle -->
-                                        <h3 class="banner-title text-white"><?= htmlspecialchars($indexCrud['titre']) ?></h3>
-                                        <!-- End .banner-title -->
-                                        <p class="d-none d-lg-block"><?= htmlspecialchars($indexCrud['texte']) ?></p>
+                                        <h class="banner-subtitle text-primary">Nos pokes</h4><!-- End .banner-subtitle -->
+                                            <h3 class="banner-title text-white"><?= htmlspecialchars($indexCrud['titre']) ?></h3>
+                                            <!-- End .banner-title -->
+                                            <p class="d-none d-lg-block couleurBlanche"><?= htmlspecialchars($indexCrud['texte']) ?></p>
 
                                     </div><!-- End .banner-content -->
                                 </div><!-- End .banner -->
@@ -627,6 +672,7 @@ $fermerOuOuvert = magasinFermerOuOuvert();
             <div class="mb-5"></div><!-- End .mb-6 -->
 
             <!-- debut du menu categorie   -->
+
             <div class="container categories pt-6">
                 <h2 class="title-lg text-center couleurJaune mb-4">Découvrez par menu</h2><!-- End .title-lg text-center -->
 
@@ -681,10 +727,12 @@ $fermerOuOuvert = magasinFermerOuOuvert();
                         </div>
                     </div><!-- End .col-sm-6 col-lg-3 -->
                 </div><!-- End .row -->
-            </div><!-- End .container -->
+            </div>
+
             <!-- fin du menu categorie   -->
 
             <div class="mb-5"></div><!-- End .mb-6 -->
+
             <!-- debut des actualites   -->
             <?php
             $actualitess = viewIndexFullActualites();
@@ -787,7 +835,7 @@ $fermerOuOuvert = magasinFermerOuOuvert();
                     </div><!-- End .cta -->
                 <?php } ?>
             <?php } ?>
-            <!-- fin du inscrit toi  -->
+           
         </main><!-- End .main -->
 
 

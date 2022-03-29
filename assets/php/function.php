@@ -32,6 +32,16 @@ function voirAdressePrincipal($id,$prio){
     $user = $users->fetchAll();
     return $user;
 }
+function voirAdressePrincipalCommande($id,$prio){
+    global $bdd;
+    $users = $bdd->prepare('SELECT users.id,users.lastname,users.firstname,users.email,adress.name,adress.company,adress.address,adress.postal,adress.city,adress.phone,adress.priorite FROM users INNER JOIN adress ON users.id = adress.id_users WHERE users.id = ? AND adress.priorite = ?');
+    $users->execute(array(
+        $id,
+        $prio
+    ));
+    $user = $users->fetch();
+    return $user;
+}
 function viewFullUserAdressePrincipal($id)
 {
     global $bdd;
@@ -96,7 +106,7 @@ function viewCategoryActualite()
 function viewCategoryActualiteTest()
 {
     global $bdd;
-    $categoryActualites = $bdd->prepare("SELECT actucategory.*, actualites.id_category FROM actucategory INNER JOIN actualites ON  actualites.id_category = actucategory.id GROUP BY label ");
+    $categoryActualites = $bdd->prepare("SELECT actucategory.*, actualites.id_category FROM actucategory INNER JOIN actualites ON  actualites.id_category = actucategory.id GROUP BY label");
     $categoryActualites->execute([]);
     $categoryActualite = $categoryActualites->fetchAll();
     return $categoryActualite;
@@ -189,7 +199,7 @@ function viewOrdersLines($id, $ordersId)
 function viewOrders($id)
 {
     global $bdd;
-    $req = $bdd->prepare("SELECT orders.id,orders.orderdate,orders.billingadress,orders.status from orders WHERE orders.id_users = ? ORDER BY orders.id DESC");
+    $req = $bdd->prepare("SELECT orders.id,orders.orderdate,orders.billingadress,orders.status,orders.methodeLivraison,orders.heureLivraison from orders WHERE orders.id_users = ? ORDER BY orders.id DESC");
     $req->execute(
         array(
             $id
@@ -218,7 +228,7 @@ function viewOnlyArticle($id){
 
 function promoAafficher(){
     global $bdd;
-    $req = $bdd->prepare("SELECT * FROM promo");
+    $req = $bdd->prepare("SELECT * FROM promo WHERE now() BETWEEN debut AND fin");
     $req->execute();
     $promos = $req->fetchAll();
     return $promos;

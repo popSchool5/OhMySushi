@@ -27,12 +27,12 @@ if(!empty($_GET['email']) && isset($_GET['email'])){
                          'X-Mailer:PHP/' . phpversion();
                     $headers .= "Content-Type: text/html; charset=\"iso-8859-1\"";
                     if (mail($destinataire, $sujet, $message, $headers)) {
-                         header('location: franchise.php?success=email');
+                         header('location: ../../franchise.php?success=email');
                     } else {
-                         header('location: franchise.php?error=email');
+                         header('location: ../../franchise.php?error=email');
                     }
                } else {
-                    header('location: franchise.php?error=adresseemail');
+                    header('location: ../../franchise.php?error=adresseemail');
                }
          
 
@@ -61,12 +61,12 @@ if(!empty($_GET['email']) && isset($_GET['email'])){
                     'X-Mailer:PHP/' . phpversion();
                $headers .= "Content-Type: text/html; charset=\"iso-8859-1\"";
                if (mail($destinataire, $sujet, $message, $headers)) {
-                    header('location: franchise.php?success=email');
+                    header('location: ../../franchise.php?success=email');
                } else {
-                    header('location: franchise.php?error=email');
+                    header('location: ../../franchise.php?error=email');
                }
           } else {
-               header('location: franchise.php?error=adresseemail');
+               header('location: ../../franchise.php?error=adresseemail');
           }
      }else if($_GET['email'] == 'reservation'){
          $nom = $_POST['name']; 
@@ -107,12 +107,12 @@ if(!empty($_GET['email']) && isset($_GET['email'])){
                     'X-Mailer:PHP/' . phpversion();
                $headers .= "Content-Type: text/html; charset=\"iso-8859-1\"";
                if (mail($destinataire, $sujet, $message, $headers)) {
-                    header('location: reservation.php?success=email');
+                    header('location: ../../reservation.php?success=email');
                } else {
-                    header('location: reservation.php?error=email');
+                    header('location: ../../reservation.php?error=email');
                }
           } else {
-               header('location: reservation.php?error=adresseemail');
+               header('location: ../../reservation.php?error=adresseemail');
           }
      }
 

@@ -87,6 +87,7 @@
         display: block;
         transition: 0.3s;
     }
+
     .dropdown-cart-action-moi{
         margin:2rem 0 8rem 0;
         display: flex;
@@ -104,7 +105,10 @@
       
     }
   
-
+    .product-image-container-moi img{
+        max-width: 70% !important;
+    }
+   
 </style>
 <div id="mySidenav" class="sidenav sidenav-moi">
     <h1>Mon panier</h1>
@@ -113,7 +117,7 @@
         <div class="productMobilePanier product product-moi">
             <div class="product-cart-details">
                 <h4 class="product-title">
-                    <a href="product.html" class="product-title-moi bgbgtestjson text-white"><?= htmlspecialchars($productDansLePanier['name']) ?></a>
+                    <a href="product.php?id=<?= $productDansLePanier['id'] ?>" class="product-title-moi bgbgtestjson text-white"><?= htmlspecialchars($productDansLePanier['name']) ?></a>
                 </h4>
 
                 <span class="cart-product-info">
@@ -122,8 +126,8 @@
                 </span>
             </div><!-- End .product-cart-details -->
 
-            <div class="product-image-container">
-                <a href="product.html" class="product-image">
+            <div class="product-image-container product-image-container-moi">
+                <a href="product.php?id=<?= $productDansLePanier['id'] ?>" class="product-image">
                     <img src="./sysadmin/html/assets/uploads/<?= htmlspecialchars($productDansLePanier['image']) ?>" alt="product">
                 </a>
             </div>

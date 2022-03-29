@@ -19,7 +19,7 @@ if (!empty($_GET)) {
 
             if (isset($_SESSION['panier'][$p])) {
                 $_SESSION['panier'][$p]++;
-                header('location: ../cart.php');
+                header('location: ../cart.php?true=incre');
             }
         } else if ($_GET['action'] == "moins") {
             $p = $_GET['productid'];
@@ -27,7 +27,7 @@ if (!empty($_GET)) {
             if($_SESSION['panier'][$p] <= 0){
                header('location: ./delpanier.php?del='.$p); 
             }else{
-            header('location: ../cart.php');
+            header('location: ../cart.php?true=decre');
 
             }
         }

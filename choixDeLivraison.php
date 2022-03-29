@@ -3,11 +3,17 @@ session_start();
 require('./assets/php/co_bdd.php');
 require('./assets/php/function.php');
 require('./assets/componants/header.php');
-
 $fermerOuOuvert = magasinFermerOuOuvert();
+$addresseDeLivraisons = voirAdressePrincipalCommande($_SESSION['users']['id'], $_SESSION['adresseEtHorraire']['adresseLivraison']);
+$villeDeLivraison = $addresseDeLivraisons['city'];
 
-$adressePrincipal = voirAdressePrincipal($_SESSION['users']['id'], 'principal');
-$adresseSecondaire = voirAdressePrincipal($_SESSION['users']['id'], 'secondaire');
+$quinzeEuro = array("Pont-à-Mousson");
+$vingtEuro = array("Blénod-lès-Pont-à-Mousson", "Maidières", "Montauville");
+$vingtCinqEuro = array("Jezainville", "Norroy-lès-Pont-à-Mousson");
+$trenteEuro = array("Vandiéres");
+$quarenteEuro = array("Champey-sur-Moselle", "Pagny-sur-Moselle", "Dieulouard", "Cheminot");
+$trenteCinqEuro = array("Lesménils", "Atton", "Mousson");
+
 
 ?>
 
@@ -19,7 +25,7 @@ $adresseSecondaire = voirAdressePrincipal($_SESSION['users']['id'], 'secondaire'
         <main class="main">
             <div class="page-header text-center" style="background:#010101">
                 <div class="container">
-                    <h1 class="page-title couleurBlanche">Choix de l'adresse</h1>
+                    <h1 class="page-title couleurBlanche">Méthode de livraison</h1>
                 </div><!-- End .container -->
             </div><!-- End .page-header -->
             <nav aria-label="breadcrumb" class="breadcrumb-nav">
@@ -41,136 +47,224 @@ $adresseSecondaire = voirAdressePrincipal($_SESSION['users']['id'], 'secondaire'
                     <div class="container">
 
                         <div class="row">
+                            <style>
+                                #container {
+                                    margin: 0 auto;
 
+                                }
+
+                                #accordion .input1erDegres {
+                                    display: none;
+                                }
+
+                                #accordion label {
+                                    background: #212121;
+                                    border-radius: .25em;
+                                    cursor: pointer;
+
+                                    margin-bottom: .125em;
+                                    padding: .25em 1em;
+                                    z-index: 20;
+                                    height: 150px;
+                                    color: white;
+                                    margin-bottom: 2.5rem;
+                                }
+
+                                #accordion label:hover {
+                                    background-color: #212121 !important;
+                                }
+
+                                #accordion .input1erDegres:checked+label {
+
+
+                                    height: 150px;
+                                    color: white;
+                                    background-color: #ff00007a !important;
+                                    border: 1px solid red;
+                                }
+
+
+
+
+
+
+                                .divbglabel label {
+                                    display: flex;
+                                    width: 100%;
+                                    justify-content: center;
+                                    align-items: center;
+                                }
+
+                                .labelColumn {
+                                    display: flex;
+                                    align-items: center;
+                                    flex-direction: column;
+                                    color: white;
+                                }
+
+                                .labelColumn p {
+
+                                    color: white;
+                                }
+                            </style>
                             <div class="col-lg-9">
-                                <?php if ($adressePrincipal || $adresseSecondaire) { ?>
-                                    <form action="./modeDeLivraison.php" method="post">
 
-                                        <style>
-                                            .label-for-check {
-                                                border: 1px solid grey;
-                                                padding: 2.5rem;
-                                                margin-top: 1.3rem;
-                                                border-radius: 2px;
-                                                min-width: 320px;
-                                                min-height: 150px;
-                                                text-align: center;
-                                                background-color: rgb(23 23 23 / 81%);
+                                <body>
+                                    <div id="container">
+                                        <form action="choixDeLivraison2.php" method="POST">
+                                            <section id="accordion">
+                                                <div class="divbglabel">
+                                                    <input class="input1erDegres" name="un" type="radio" value="emporter" id="check-1" />
+                                                    <label class="check-un" for="check-1">
+                                                        <div class="labelColumn">
+                                                            <img src="./emporter.png" width="65px" alt="">
+                                                            <p>Emporter</p>
+                                                        </div>
 
-                                            }
-
-                                            .label-for-check img {
-
-                                                margin: auto;
-                                            }
-
-                                            .check-with-label:checked+.label-for-check {
-                                                border: 1px solid red;
-                                                background-color: rgba(255, 71, 71, 0.7);
-                                            }
-
-                                            .check-with-label {
-                                                visibility: hidden;
-                                            }
-
-                                            .choixDeLadresse {
-                                                display: flex;
-                                                flex-wrap: wrap;
-                                                justify-content: center;
-                                               
-                                            }
-
-                                            .fas{
-                                                font-size: 30px;
-
-                                            }
-
-                                        </style>
-
-                                        <div class="choixDeLadresse">
-                                            <?php if ($adressePrincipal) { ?>
-                                                <div class="sauce">
-                                                    <input type="radio" name="adresseDeLivraisonChoisie" class="check-with-label" id="idinput1" />
-                                                    <label class="label-for-check" for="idinput1">
-                                                        <h6 class="couleurBlanche"><i class="fas fa-map-marker-alt"></i></h6>
-                                                        <?php foreach($adressePrincipal as $ap){ ?>
-                                                           <p  class="couleurBlanche" ><?= $ap['name']; ?> </p> 
-                                                           <p class="couleurBlanche" > <?= $ap['company']; ?> </p> 
-                                                           <p class="couleurBlanche"> <?= $ap['address']; ?> </p> 
-                                                           <p class="couleurBlanche"> <?= $ap['postal']; ?>,<?= $ap['city']; ?> </p> 
-                                                           <p class="couleurBlanche"> <?= $ap['phone']; ?> </p>
-                                                        <?php } ?>
                                                     </label>
-                                                </div>
-                                            <?php } ?>
-                                            <?php if ($adresseSecondaire) { ?>
 
-                                                <div class="sauce">
-                                                    <input type="radio" name="adresseDeLivraisonChoisie" class="check-with-label" id="idinput" />
-                                                    <label class="label-for-check" for="idinput">
-                                                    <h6 class="couleurBlanche"><i class="fas fa-map-marker-alt"></i></h6>
-                                                        <?php foreach($adresseSecondaire as $as){ ?>
-                                                           <p  class="couleurBlanche" ><?= $as['name']; ?> </p> 
-                                                           <p class="couleurBlanche" > <?= $as['company']; ?> </p> 
-                                                           <p class="couleurBlanche"> <?= $as['address']; ?> </p> 
-                                                           <p class="couleurBlanche"> <?= $as['postal']; ?>,<?= $as['city']; ?> </p> 
-                                                           <p class="couleurBlanche"> <?= $as['phone']; ?> </p>
-                                                        <?php } ?>
-                                                    </label>
                                                 </div>
-                                            <?php } ?>
+                                                <div class="divbglabel">
+                                                    <input class="input1erDegres" name="un" type="radio" value="surplace" id="check-2" />
+                                                    <label for="check-2">
+                                                        <div class="labelColumn">
+                                                            <img src="./surplaceD.png" width="60px" alt="">
+
+                                                            <p>Sur place</p>
+                                                        </div>
+                                                    </label>
+
+                                                </div>
+
+
+
+
+                                                <?php
+                            if (($panier->total() >= 15) && in_array($villeDeLivraison, $quinzeEuro)) {
+                            ?>
+
+                                <div class="divbglabel">
+                                    <input class="input1erDegres" name="un" type="radio" value="livraison" id="check-3" />
+                                    <label for="check-3">
+                                        <div class="labelColumn">
+                                            <img src="./deliveryIc.png" width="60px" alt="">
+                                            <p>Livraison</p>
                                         </div>
-                                    </form>
-                                <?php } else { ?>
-                                    <form method="POST" action="./dashboard/editAdress.php?prio=principal">
-                                                <input type="hidden" name="id" value="<?= $_SESSION['users']['id'] ?>">
-                                                <input type="hidden" name="chemin" value="adresseFacturation">
-                                                <div class="row">
-                                                
-                                                    <div class="col-sm-6">
-                                                        <label>Intitulé de l'adresse *</label>
-                                                        <input type="text" name="name" class="form-control" required>
-                                                    </div><!-- End .col-sm-6 -->
+                                    </label>
 
-                                                    <div class="col-sm-6">
-                                                        <label>Entreprise (facultatif) </label>
-                                                        <input type="text" name="company" class="form-control">
-                                                    </div><!-- End .col-sm-6 -->
-                                                </div><!-- End .row -->
+                                </div>
+
+                            <?php
+                            } elseif (($panier->total() >= 20) && (in_array($villeDeLivraison, $vingtEuro) | in_array($villeDeLivraison, $quinzeEuro))) {
+                            ?>
+
+                                <div class="divbglabel">
+                                    <input class="input1erDegres" name="un" type="radio" value="livraison" id="check-3" />
+                                    <label for="check-3">
+                                        <div class="labelColumn">
+                                            <img src="./deliveryIc.png" width="60px" alt="">
+                                            <p>Livraison</p>
+                                        </div>
+                                    </label>
+
+                                </div>
+
+                            <?php
+                            } elseif (($panier->total() >= 25) && (in_array($villeDeLivraison, $vingtEuro) || in_array($villeDeLivraison, $vingtCinqEuro))) {
+                            ?>
+
+                                <div class="divbglabel">
+                                    <input class="input1erDegres" name="un" type="radio" value="livraison" id="check-3" />
+                                    <label for="check-3">
+                                        <div class="labelColumn">
+                                            <img src="./deliveryIc.png" width="60px" alt="">
+                                            <p>Livraison</p>
+                                        </div>
+                                    </label>
+
+                                </div>
+
+                            <?php
+                            } elseif (($panier->total() >= 30) && (in_array($villeDeLivraison, $vingtEuro) || in_array($villeDeLivraison, $vingtCinqEuro) || in_array($villeDeLivraison, $trenteEuro))) {
+                            ?>
+                                <div class="divbglabel">
+                                    <input class="input1erDegres" name="un" type="radio" value="livraison" id="check-3" />
+                                    <label for="check-3">
+                                        <div class="labelColumn">
+                                            <img src="./deliveryIc.png" width="60px" alt="">
+                                            <p>Livraison</p>
+                                        </div>
+                                    </label>
+
+                                </div>
 
 
-                                                <label>Addresse *</label>
-                                                <input type="text" name="address" class="form-control" placeholder="Nom de la rue" required>
+                            <?php
+                            } elseif (($panier->total() >= 35) && (in_array($villeDeLivraison, $vingtEuro) || in_array($villeDeLivraison, $vingtCinqEuro) || in_array($villeDeLivraison, $trenteEuro) || in_array($villeDeLivraison, $trenteCinqEuro))) {
+                            ?>
 
-                                                <div class="row">
+                                <div class="divbglabel">
+                                    <input class="input1erDegres" name="un" type="radio" value="livraison" id="check-3" />
+                                    <label for="check-3">
+                                        <div class="labelColumn">
+                                            <img src="./deliveryIc.png" width="60px" alt="">
+                                            <p>Livraison</p>
+                                        </div>
+                                    </label>
 
-                                                    <div class="col-sm-6">
-                                                        <label>Code postal *</label>
-                                                        <input type="text" id="postalFacturation" name="postal" class="form-control" required>
-                                                    </div><!-- End .col-sm-6 -->
+                                </div>
 
-                                                    <div class="form-group col-sm-6">
-                                                        <label for="cityFacturation">Ville</label><br>
-                                                        <select class="form-control" name="city" id="cityFacturation">
+                            <?php
 
-                                                        </select>
-                                                    </div>
+                            } elseif (($panier->total() >= 40) && (in_array($villeDeLivraison, $trenteCinqEuro) || in_array($villeDeLivraison, $quarenteEuro) || in_array($villeDeLivraison, $trenteEuro) || in_array($villeDeLivraison, $vingtEuro) || in_array($villeDeLivraison, $vingtCinqEuro))) {
+                            ?>
 
-                                                </div><!-- End .row -->
+                                <div class="divbglabel">
+                                    <input class="input1erDegres" name="un" type="radio" value="livraison" id="check-3" />
+                                    <label for="check-3">
+                                        <div class="labelColumn">
+                                            <img src="./deliveryIc.png" width="60px" alt="">
+                                            <p>Livraison</p>
+                                        </div>
+                                    </label>
 
-                                                <div class="row">
+                                </div>
+
+                            <?php
+
+                            }
+
+                            ?>
 
 
-                                                    <div class="col-sm-12">
-                                                        <label>Téléphone *</label>
-                                                        <input type="tel" name="phone" class="form-control" required>
-                                                    </div><!-- End .col-sm-6 -->
-                                                </div><!-- End .row -->
-                                                <button class="btn btn-outline-primary-2" type="submit">Enregistrer</button>
-                                            </form>
+                                            </section>
 
-                                <?php } ?>
+
+                                    </div>
+
                             </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
                             <aside class="col-lg-3">
                                 <style>
@@ -202,9 +296,8 @@ $adresseSecondaire = voirAdressePrincipal($_SESSION['users']['id'], 'secondaire'
                                     if (!empty($_SESSION['panier'])) {
                                         if (!empty($_SESSION['users'])) { ?>
                                             <button type="submit" class="btn btn-outline-primary-2 btn-order btn-block">Passer au mode de livraison</button>
-                                        <?php } else { ?>
-                                            <button type="button" href="#signin-modal" data-toggle="modal" class="btn btn-outline-primary-2 btn-order btn-block">Passer au mode de livraison</button>
-                                    <?php   }
+                                    <?php
+                                        }
                                     } ?>
 
 
@@ -223,132 +316,16 @@ $adresseSecondaire = voirAdressePrincipal($_SESSION['users']['id'], 'secondaire'
                 </div><!-- End .cart -->
             </div><!-- End .page-content -->
         </main><!-- End .main -->
-
-        <footer class="footer footer-dark">
-            <div class="footer-middle">
-                <div class="container">
-                    <div class="row">
-                        <div class="col-sm-6 col-lg-3">
-                            <div class="widget widget-about">
-                                <img src="assets/images/logoOMS2.jpg" class="footer-logo" alt="Footer Logo" width="105" height="25">
-                                <p>Praesent dapibus, neque id cursus ucibus, tortor neque egestas augue, eu vulputate
-                                    magna eros eu erat. </p>
-
-                                <div class="social-icons">
-                                    <a href="#" class="social-icon" title="Facebook" target="_blank"><i class="icon-facebook-f"></i></a>
-                                    <a href="#" class="social-icon" title="Twitter" target="_blank"><i class="icon-twitter"></i></a>
-                                    <a href="#" class="social-icon" title="Instagram" target="_blank"><i class="icon-instagram"></i></a>
-                                    <a href="#" class="social-icon" title="Youtube" target="_blank"><i class="icon-youtube"></i></a>
-                                    <a href="#" class="social-icon" title="Pinterest" target="_blank"><i class="icon-pinterest"></i></a>
-                                </div><!-- End .soial-icons -->
-                            </div><!-- End .widget about-widget -->
-                        </div><!-- End .col-sm-6 col-lg-3 -->
-
-                        <div class="col-sm-6 col-lg-3">
-                            <div class="widget">
-                                <h4 class="widget-title">Liens du site</h4><!-- End .widget-title -->
-
-                                <ul class="widget-list">
-                                    <li><a href="#">Menu</a></li>
-                                    <li><a href="#">Recrutement</a></li>
-                                    <li><a href="#">FAQ</a></li>
-                                    <li><a href="contact.html">Contactez nous</a></li>
-                                    <li><a href="login.html">Connexion</a></li>
-                                </ul><!-- End .widget-list -->
-                            </div><!-- End .widget -->
-                        </div><!-- End .col-sm-6 col-lg-3 -->
-
-                        <div class="col-sm-6 col-lg-3">
-                            <div class="widget">
-                                <h4 class="widget-title">Nos services</h4><!-- End .widget-title -->
-
-                                <ul class="widget-list">
-                                    <li><a href="#">Moyens de paiements</a></li>
-                                    <li><a href="#"></a></li>
-                                    <li><a href="#">Livraisons</a></li>
-                                    <li><a href="#">Emportez</a></li>
-                                    <li><a href="#">Termes et conditions</a></li>
-                                    <li><a href="#">RGPD</a></li>
-                                </ul><!-- End .widget-list -->
-                            </div><!-- End .widget -->
-                        </div><!-- End .col-sm-6 col-lg-3 -->
-
-                        <div class="col-sm-6 col-lg-3">
-                            <div class="widget">
-                                <h4 class="widget-title">Mon compte</h4><!-- End .widget-title -->
-
-                                <ul class="widget-list">
-                                    <li><a href="#">Connexion / Inscription</a></li>
-                                    <li><a href="">Mon panier</a></li>
-                                    <li><a href="#">Mes favoris</a></li>
-                                    <li><a href="#"></a></li>
-
-                                </ul><!-- End .widget-list -->
-                            </div><!-- End .widget -->
-                        </div><!-- End .col-sm-6 col-lg-3 -->
-                    </div><!-- End .row -->
-                </div><!-- End .container -->
-            </div><!-- End .footer-middle -->
-
-            <div class="footer-bottom">
-                <div class="container">
-                    <p class="footer-copyright">Copyright © 2021 Oh My Sushi. All Rights Reserved.</p>
-                    <!-- End .footer-copyright -->
-                    <figure class="footer-payments">
-                        <img src="assets/images/payments.png" alt="Payment methods" width="272" height="20">
-                    </figure><!-- End .footer-payments -->
-                </div><!-- End .container -->
-            </div><!-- End .footer-bottom -->
-        </footer><!-- End .footer -->
+        <?php require("./assets/componants/footer.php"); ?>
+        <?php require("./assets/componants/navmenumobile.php"); ?>
     </div><!-- End .page-wrapper -->
     <button id="scroll-top" title="Back to Top"><i class="icon-arrow-up"></i></button>
 
+    <?php require('./assets/componants/menu.php'); ?>
+    <?php require('./assets/componants/fenetreModalConnexion.php'); ?>
     <!-- Mobile Menu -->
     <div class="mobile-menu-overlay"></div>
 
-    <div class="mobile-menu-container">
-        <div class="mobile-menu-wrapper">
-            <span class="mobile-menu-close"><i class="icon-close"></i></span>
-            <nav class="mobile-nav">
-                <style>
-                    .mobile-nav ul li {
-                        padding: 0.5rem;
-                        text-align: center;
-                    }
-                </style>
-                <ul class="mobile-menu">
-                    <li class="active">
-                        <a href="index.html">Menu</a>
-
-                    </li>
-                    <li>
-                        <a href="#signin-modal" data-toggle="modal">Se connecter / s'inscrire</a>
-                    </li>
-                    <li>
-                        <a href="product.html" class="sf-with-ul">Commander</a>
-
-                    </li>
-                    <li>
-                        <a href="#">Recrutement</a>
-                    </li>
-                    <li>
-                        <a href="#">Glossaire des ingrédients</a>
-                    </li>
-                    <li>
-                        <a href="actualites.html">Actualités</a>
-                    </li>
-
-                </ul>
-            </nav><!-- End .mobile-nav -->
-
-            <div class="social-icons">
-                <a href="#" class="social-icon" target="_blank" title="Facebook"><i class="icon-facebook-f"></i></a>
-                <a href="#" class="social-icon" target="_blank" title="Twitter"><i class="icon-twitter"></i></a>
-                <a href="#" class="social-icon" target="_blank" title="Instagram"><i class="icon-instagram"></i></a>
-                <a href="#" class="social-icon" target="_blank" title="Youtube"><i class="icon-youtube"></i></a>
-            </div><!-- End .social-icons -->
-        </div><!-- End .mobile-menu-wrapper -->
-    </div><!-- End .mobile-menu-container -->
 
     <?php require('./assets/componants/fenetreModalConnexion.php'); ?>
     <?php require('./assets/componants/navmenumobile.php'); ?>

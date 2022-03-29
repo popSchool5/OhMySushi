@@ -161,7 +161,7 @@ if (!empty($_SESSION)) {
                                         ?>
 
                                             <tr role="row" class="gridgt <?= $menu['label'] ?>" class="odd">
-                                                <td class="text-bold-600 pr-0 sorting_1"><img class=" mr-1" src="./assets/uploads/petite<?= $menu['image'] ?>" width="55%" alt="card"></td>
+                                                <td class="text-bold-600 pr-0 sorting_1"><img class=" mr-1" src="./assets/uploads/<?= $menu['image'] ?>" width="55%" alt="card"></td>
                                                 <td><?= $menu['name'] ?></td>
                                                 <td class="text-bold-600"><span><?= $menu['description'] ?></span>
                                                 </td>

@@ -16,6 +16,7 @@ $adresseSecondaire = voirAdressePrincipal($_SESSION['users']['id'], 'secondaire'
 <body>
     <div class="page-wrapper">
         <?php require('./assets/componants/barreMenu.php'); ?>
+               <?php require('./aa.php'); ?>
         <main class="main">
             <div class="page-header text-center" style="background:#010101">
                 <div class="container">
@@ -44,7 +45,7 @@ $adresseSecondaire = voirAdressePrincipal($_SESSION['users']['id'], 'secondaire'
 
                             <div class="col-lg-9">
                                 <?php if ($adressePrincipal || $adresseSecondaire) { ?>
-                                    <form action="./modeDeLivraison.php" method="post">
+                                    <form action="./passage2.php" method="post">
 
                                         <style>
                                             .label-for-check {
@@ -53,7 +54,7 @@ $adresseSecondaire = voirAdressePrincipal($_SESSION['users']['id'], 'secondaire'
                                                 margin-top: 1.3rem;
                                                 border-radius: 2px;
                                                 min-width: 320px;
-                                                min-height: 150px;
+                                                min-height: 240px;
                                                 text-align: center;
                                                 background-color: rgb(23 23 23 / 81%);
 
@@ -66,23 +67,28 @@ $adresseSecondaire = voirAdressePrincipal($_SESSION['users']['id'], 'secondaire'
 
                                             .check-with-label:checked+.label-for-check {
                                                 border: 1px solid red;
-                                                background-color: rgba(255, 71, 71, 0.7);
+                                                background-color: #ff00007a !important;
                                             }
 
                                             .check-with-label {
-                                                visibility: hidden;
+                                                /* visibility: hidden; */
+                                                display: none;
                                             }
 
                                             .choixDeLadresse {
                                                 display: flex;
                                                 flex-wrap: wrap;
-                                                justify-content: center;
-                                               
+                                                justify-content: center; 
                                             }
 
                                             .fas{
                                                 font-size: 30px;
 
+                                            }
+                                            .sauce{
+                                                
+                                                margin: 2rem;
+                                                min-height: 250px;
                                             }
 
                                         </style>
@@ -90,7 +96,7 @@ $adresseSecondaire = voirAdressePrincipal($_SESSION['users']['id'], 'secondaire'
                                         <div class="choixDeLadresse">
                                             <?php if ($adressePrincipal) { ?>
                                                 <div class="sauce">
-                                                    <input type="radio" name="adresseDeLivraisonChoisie" class="check-with-label" id="idinput1" />
+                                                    <input type="radio"  name="adresseDeLivraisonChoisie" value="principal" class="check-with-label" id="idinput1" />
                                                     <label class="label-for-check" for="idinput1">
                                                         <h6 class="couleurBlanche"><i class="fas fa-map-marker-alt"></i></h6>
                                                         <?php foreach($adressePrincipal as $ap){ ?>
@@ -106,7 +112,7 @@ $adresseSecondaire = voirAdressePrincipal($_SESSION['users']['id'], 'secondaire'
                                             <?php if ($adresseSecondaire) { ?>
 
                                                 <div class="sauce">
-                                                    <input type="radio" name="adresseDeLivraisonChoisie" class="check-with-label" id="idinput" />
+                                                    <input type="radio" name="adresseDeLivraisonChoisie" value="secondaire" class="check-with-label" id="idinput" />
                                                     <label class="label-for-check" for="idinput">
                                                     <h6 class="couleurBlanche"><i class="fas fa-map-marker-alt"></i></h6>
                                                         <?php foreach($adresseSecondaire as $as){ ?>
@@ -120,7 +126,7 @@ $adresseSecondaire = voirAdressePrincipal($_SESSION['users']['id'], 'secondaire'
                                                 </div>
                                             <?php } ?>
                                         </div>
-                                    </form>
+                                   
                                 <?php } else { ?>
                                     <form method="POST" action="./dashboard/editAdress.php?prio=principal">
                                                 <input type="hidden" name="id" value="<?= $_SESSION['users']['id'] ?>">
@@ -200,12 +206,11 @@ $adresseSecondaire = voirAdressePrincipal($_SESSION['users']['id'], 'secondaire'
 
                                     <?php
                                     if (!empty($_SESSION['panier'])) {
-                                        if (!empty($_SESSION['users'])) { ?>
+                                        if (!empty($_SESSION['users'])) {
+                                        ?>
                                             <button type="submit" class="btn btn-outline-primary-2 btn-order btn-block">Passer au mode de livraison</button>
-                                        <?php } else { ?>
-                                            <button type="button" href="#signin-modal" data-toggle="modal" class="btn btn-outline-primary-2 btn-order btn-block">Passer au mode de livraison</button>
-                                    <?php   }
-                                    } ?>
+                                        <?php }
+                                        } ?>
 
 
                                     </form>

@@ -20,9 +20,11 @@
                             </button>
                         </div>
                     </div>
-                    <div class="modal fade text-left" id="inlineForm" tabindex="-1" role="dialog" aria-labelledby="myModalLabel33" aria-hidden="true">
-                        <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
-                            <div class="modal-content">
+                    
+
+                    <div class="modal fade" id="inlineForm" tabindex="-1" role="dialog" aria-labelledby="myModalLabel33" aria-hidden="true">
+                        <div class="modal-dialog" role="document">
+                        <div class="modal-content">
                                 <div class="modal-header">
                                     <h4 class="modal-title" id="myModalLabel33">Ajout d'un nouveau job</h4>
                                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
@@ -55,22 +57,79 @@
                                             <input type="file" name="images">
 
                                         </div>
-                                    </div>
-                                    <div class="modal-footer">
+                                        <div class="modal-footer">
 
-                                        <button type="button" class="btn btn-light-secondary" data-dismiss="modal">
-                                            <i class="bx bx-x d-block d-sm-none"></i>
-                                            <span class="d-none d-sm-block">Fermer</span>
-                                        </button>
-                                        <button type="submit" class="btn btn-primary ml-1">
-                                            <i class="bx bx-check d-block d-sm-none"></i>
-                                            <span class="d-none d-sm-block">Enregistrer le job</span>
-                                        </button>
+                                            <button type="button" class="btn btn-light-secondary" data-dismiss="modal">
+                                                <i class="bx bx-x d-block d-sm-none"></i>
+                                                <span class="d-none d-sm-block">Fermer</span>
+                                            </button>
+                                            <button type="submit" class="btn btn-primary ml-1">
+                                                <i class="bx bx-check d-block d-sm-none"></i>
+                                                <span class="d-none d-sm-block">Enregistrer le job</span>
+                                            </button>
+                                        </div>
                                     </div>
+
                                 </form>
                             </div>
                         </div>
                     </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
                     <div class="messageErreur">
                         <?php if (!empty($_GET['success'])) {
                             if ($_GET['success'] == 'ajout') {
@@ -181,7 +240,7 @@
 
                                                                     <fieldset class="form-group" required>
                                                                         <select name="category" class="custom-select" id="customSelect" required>
-                                                                            <option >Choisir la catégorie :</option>
+                                                                            <option>Choisir la catégorie :</option>
                                                                             <option <?php if ($recruitment['category'] == "Restaurent") {
                                                                                         echo 'selected';
                                                                                     } else {

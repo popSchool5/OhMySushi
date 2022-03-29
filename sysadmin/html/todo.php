@@ -172,7 +172,7 @@
                     <h2>TODO LIST</h2>
                     <h3>Ajouter une liste</h3>
                     <p>
-                        <input id="new-task" type="text"><button>Add</button>
+                        <input id="new-task" type="text"><button>Ajouter</button>
                     </p>
 
                     <h3>Todo</h3>
@@ -237,7 +237,7 @@
 
             //Add a new task
             var addTask = function() {
-                console.log("Add task...");
+               
                 //Create a new list item with the text from #new-task:
                 var listItem = createNewTaskElement(taskInput.value);
                 //Append listItem to incompleteTasksHolder

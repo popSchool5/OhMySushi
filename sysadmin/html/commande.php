@@ -76,7 +76,7 @@ if (!empty($_SESSION)) {
 
                     <div>
                         Adresse : <span data-adresse></span> <br>
-                        Prénom : <span data-user></span> <br>
+                        Prénom  : <span data-user></span> <br>
                         status: <span data-status></span>
                     </div>
                     <a href="./comm/changePreparation.php?id=&next=preparation"><i class="fas flecj fa-arrow-right"></i></a>
@@ -97,19 +97,17 @@ if (!empty($_SESSION)) {
 
                                 <div class="detailDuMec">
                                     <h3>Information sur la personne</h3>
-                                    <p> Prénom : </p>
-                                    <p> Nom : </p>
-                                    <p> Email : </p>
+                                    <p> Prénom : <span data-prenom></span> </p>
+                                    <p> Email : <span data-email></span> </p>
                                     <p> Tél : </p>
                                 </div>
 
                                 <div class="detailDeLaCommande">
                                     <h3>Information sur la commande</h3>
-                                    <p> Type de commande :</p>
-                                    <p> Heure :</p>
-                                    <p> Adresse : <span data-adresse></span></p>
-                                    <p> Note : </p>
-
+                                    <p> Type de commande : <span data-typecommande></span> </p>
+                                    <p> Heure : <span data-horraire></span></p>
+                                    <p> Adresse : <span data-adressee></span></p>
+                                    <p><script>console.log(data-note)</script></p>
                                 </div>
 
                                 <div class="produitDeLaCommande">
@@ -223,9 +221,15 @@ if (!empty($_SESSION)) {
                         const commande = $(event.relatedTarget);
                         const modal = $(event.target);
                         const data = commande.data('data');
-
+                        // console.log(data); 
                         modal.find('[data-id]').text(data.id);
                         modal.find('[data-user]').text(data.billingadress);
+                        modal.find('[data-email]').text(data.email);
+                        modal.find('[data-adressee]').text(data.billingadress);
+                        modal.find('[data-prenom]').text(data.firstname + ' ' + data.lastname);
+                        modal.find('[data-horraire]').text(data.heureLivraison);
+                        modal.find('[data-note]').text(data.note);
+                        modal.find('[data-typecommande]').text(data.methodelivraison);
                         const ul = modal.find('ul');
                         ul.empty();
                         for (orderline of data.orderlines) {
@@ -248,9 +252,11 @@ if (!empty($_SESSION)) {
                         const messages = $('.nouvellesCommandes');
                         const templateCommande = $('.commandeEnPreparation[data-template]')
                         for (commande of commandes) {
+                            // console.log(commande);
                             if (!commandesAfficher.includes(commande.id)) {
                                 commandesAfficher.push(commande.id);
                                 let divCommande = templateCommande.clone(true);
+                                console.log(commande)
                                 divCommande.removeAttr('data-template');
                                 divCommande.find("[data-user]").text(commande.lastname + ' ' + commande.firstname);
                                 divCommande.find("[data-status]").text(commande.status);
@@ -271,7 +277,7 @@ if(!commandesNotifiees.includes(commande.id))
     commandesNotifiees.push(commande.id);
     localStorage.setItem('commandesNotifiees', JSON.stringify(commandesNotifiees));
 }
-                                //notifyMe();
+                                notifyMe();
                             }
 
                         }
@@ -286,8 +292,8 @@ if(!commandesNotifiees.includes(commande.id))
 
                 function notifyMe() {
 
-                    // var audio = new Audio('applaudissement.mp3');
-                    // audio.play();
+                    var audio = new Audio('applaudissement.mp3');
+                    audio.play();
 
                     if (!window.Notification) {
                         console.log('Browser does not support notifications.');

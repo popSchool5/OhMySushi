@@ -4,7 +4,7 @@
             <div class="product">
                 <div class="product-cart-details">
                     <h4 class="product-title">
-                        <a href="product.html" class="bgbgtestjson text-white"><?= htmlspecialchars($productDansLePanier['name']) ?></a>
+                        <a href="product.php?id=<?= $productDansLePanier['id'] ?>" class="bgbgtestjson text-white"><?= htmlspecialchars($productDansLePanier['name']) ?></a>
                     </h4>
 
                     <span class="cart-product-info">
@@ -14,7 +14,7 @@
                 </div><!-- End .product-cart-details -->
 
                 <figure class="product-image-container">
-                    <a href="product.html" class="product-image">
+                    <a href="product.php?id=<?= $productDansLePanier['id'] ?>"  class="product-image">
                         <img src="./sysadmin/html/assets/uploads/<?= htmlspecialchars($productDansLePanier['image']) ?>" alt="product">
                     </a>
                 </figure>

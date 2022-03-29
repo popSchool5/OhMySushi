@@ -324,7 +324,7 @@ if (!empty($_GET['sess'] == "insc")) {
             }
         }
         if ($error == 1) {
-            header('location: ../index.php/#signin-modal');
+            header('location: ../index.php?error=mdpOuMail');
             exit();
         }
     }

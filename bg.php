@@ -5,23 +5,36 @@ require('./assets/php/co_bdd.php');
 require('./assets/php/function.php');
 require('./assets/componants/header.php');
 require('./assets/componants/barreMenu.php');
-$us = viewFullUserAdresse($_SESSION['users']['id']);
+$us = voirAdressePrincipalCommande($_SESSION['users']['id'],$_SESSION['adresseEtHorraire']['adresseLivraison']);
 
-var_dump($_SESSION);
-$adress = $us['name'];
-$adress .= ' : ';
-$adress .= $us['address'];
-$adress .= ' ';
-$adress .=  $us['postal'];
-$adress .= ' ';
-$adress .=  $us['city'];
+$heureDeLivraison = $_SESSION['adresseEtHorraire']['horraire'];
+$methodeDeLivraison =$_SESSION['adresseEtHorraire']['methodeDeLivraison']; 
+ 
 
-$req = $bdd->prepare('INSERT INTO orders(billingadress,deliveryadress,status,id_users) VALUES (:billingadress,:deliveryadress,:status,:id_users)');
+$adressConcatener = $us['name'];
+$adressConcatener .= ' : ';
+$adressConcatener .= $us['address'];
+$adressConcatener .= ' ';
+$adressConcatener .=  $us['postal'];
+$adressConcatener .= ' ';
+$adressConcatener .=  $us['city'];
+
+// var_dump($_SESSION);  
+if(!empty($_SESSION['promo']) && isset($_SESSION['promo'])){
+    $id_promo = $_SESSION['promo']['id'];
+}else{
+    $id_promo = null;
+}
+
+$req = $bdd->prepare('INSERT INTO orders(billingadress,deliveryadress,methodeLivraison,heureLivraison,status,id_users,id_promo) VALUES (:billingadress,:deliveryadress,:methodeLivraison,:heureLivraison,:status,:id_users,:id_promo)');
 $insertOrders = $req->execute(array(
-    'billingadress' => $adress,
-    'deliveryadress' => $adress,
+    'billingadress' => $adressConcatener,
+    'deliveryadress' => $adressConcatener,
+    'heureLivraison'=> $heureDeLivraison,
+    'methodeLivraison' => $methodeDeLivraison,
     'status' => "Attente",
-    'id_users' => $us['id']
+    'id_users' => $us['id'],
+    'id_promo' => $id_promo
 ));
 
 
@@ -42,16 +55,16 @@ foreach ($productsDansLePanier as $ProductPanier) {
 unset($_SESSION['panier']); 
 ?>
 
-<body>
-    <h3>Paiement accepter</h3>
-    <script>
-        function redir() {
-            self.location.href = "./index.php"
-        }
-        setTimeout(redir, 4000)
+ <body>
+     <h3 class="couleurBlanche">Paiement accepter</h3>
+     <script>
+         function redir() {
+             self.location.href = "./index.php"
+         }
+         setTimeout(redir, 4000)
 
        
-    </script>
-</body>
+     </script>
+ </body>
 
-</html>
+ </html>

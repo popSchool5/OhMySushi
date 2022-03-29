@@ -90,9 +90,9 @@ if (!empty($_SESSION['users'])) {
                                                             <h6>Commande numero : <?= $orderUsers['id']; ?> </h6><br>
                                                             <span>Statut de la commande : <?= $orderUsers['status'] ?></span><br>
                                                             <span>Adresse de facturation : <?= $orderUsers['billingadress']  ?></span><br>
-                                                            <span>Mode de livraison : Emporter</span><br>
+                                                            <span>Mode de livraison : <?= $orderUsers['methodeLivraison']  ?></span><br></span><br>
 
-                                                            <a href="#" data-toggle="modal" data-target="[data-commande='<?= $adressUser['id'] ?>&<?= $orderUsers['id'] ?>'">Voir la commande <i class="icon-edit"></i></a>
+                                                            <a href="#" data-toggle="modal" data-target="[data-commande='<?= $orderUsers['id'] ?>'">Voir la commande <i class="icon-edit"></i></a>
                                                         </div>
 
                                                     </div>
@@ -104,7 +104,7 @@ if (!empty($_SESSION['users'])) {
                                                     ?>
 
 
-                                                    <div class="modal fade" id="exampleModalLongv" data-commande='<?= $adressUser['id'] ?>&<?= $orderUsers['id'] ?>' tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true">
+                                                    <div class="modal fade" id="exampleModalLongv" data-commande='<?= $orderUsers['id'] ?>' tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true">
                                                         <div class="modal-dialog modal-xl " role="document">
                                                             <div class="modal-content  modal-lg  p-4">
                                                                 <div class="modal-header">
@@ -153,7 +153,8 @@ if (!empty($_SESSION['users'])) {
                                                                     <h3 class="mt-5 ">Information</h3>
                                                                     <span>Statut de la commande : <?= $orderUsers['status'] ?></span><br>
                                                                     <span>Adresse de facturation : <?= $orderUsers['billingadress']  ?></span><br>
-                                                                    <span>Mode de livraison : Emporter</span><br>
+                                                                 
+                                                                    <span>Mode de livraison : </span><br>
                                                                 </div>
 
                                                             </div>
@@ -326,7 +327,7 @@ if (!empty($_SESSION['users'])) {
                                                                     <?= $adressUserSecondaire['phone'] ?><br>
                                                                     <?= $adressUserSecondaire['email'] ?><br>
 
-                                                                  
+
                                                                     <a href="./dashboard/deleteAdress.php?id=<?= $adressUserSecondaire['id'] ?>&prio=secondaire">Supprimer <i class="icon-edit"></i></a>
                                                                 </p>
                                                             <?php } else { ?>

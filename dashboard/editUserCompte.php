@@ -12,10 +12,26 @@ if (!empty($_SESSION['users'])) {
             $requ->execute(array(
                 $_POST['email']
             ));
-            var_dump($requ->rowCount()); 
-            if ($requ->rowCount() > 1) {
-                header('location: ../dashboard.php?error=emailerroner');
-                exit();
+            
+            $aa = $requ -> fetch(); 
+            
+     
+            if ($aa) {
+                if($_POST['email'] !== $aa['email']){
+                    header('location: ../dashboard.php?error=emailerroner');
+                    exit();
+                }else{
+                    $req = $bdd->prepare('UPDATE users SET lastname = ?,firstname=? WHERE id = ?');
+                    $req->execute(array(
+                        $_POST['lastname'],
+                        $_POST['firstname'],
+                      
+                        $_POST['id']
+                    ));
+                    header('location: ../dashboard.php?error=emailerroner');
+                }
+                
+                
             } else {
                 $req = $bdd->prepare('UPDATE users SET lastname = ?,firstname=?,email = ? WHERE id = ?');
                 $req->execute(array(
@@ -47,11 +63,11 @@ if (!empty($_SESSION['users'])) {
 
 
 
-$req = $bdd->prepare("SELECT * FROM users WHERE email=:email");
-$req->bindValue(':email', $email, PDO::PARAM_STR);
-$req->execute();
+// $req = $bdd->prepare("SELECT * FROM users WHERE email=:email");
+// $req->bindValue(':email', $email, PDO::PARAM_STR);
+// $req->execute();
 
-if ($req->rowCount() > 0) {
-    array_push($err['mess'], 'un email est deja enregistrer avec cette email');
-    $err['codeErr'] = 1;
-}
+// if ($req->rowCount() > 0) {
+//     array_push($err['mess'], 'un email est deja enregistrer avec cette email');
+//     $err['codeErr'] = 1;
+// }

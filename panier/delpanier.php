@@ -14,5 +14,5 @@ $productsDansLePanier = viewPanierArticle($ids);
 
 if(isset($_GET['del'])){
     $panier -> del($_GET['del']);
-    header('location:../cart.php'); 
+    header('location:../cart.php?true=decre'); 
 }

@@ -5,6 +5,9 @@ require('./assets/php/co_bdd.php');
 require('./assets/php/function.php');
 
 $lesCategory = categoryMenu();
+
+ 
+
 $products = products();
 
 function test($bg)
@@ -15,6 +18,12 @@ function test($bg)
     $pros = $pro->fetchAll();
     return $pros;
 }
+
+$testOO = $bdd -> prepare('SELECT products.*, category.label FROM products INNER JOIN category ON products.id_category = category.id'); 
+$testOO -> execute(); 
+$vfvfvf = $testOO -> fetchAll(); 
+var_dump($vfvfvf); 
+
 
 require('./assets/componants/header.php');
 ?>
@@ -215,7 +224,7 @@ require('./assets/componants/header.php');
                                                     ?>
 
                                                         <div class="product-action">
-                                                            <a class="add addPanier btn-product btn-cart" href="./panier/addpanier.php?id=<?= $product['id'] ?>"><span>Ajovuter au
+                                                            <a class="add addPanier btn-product btn-cart" href="./panier/addpanier.php?id=<?= $product['id'] ?>"><span>Ajouter au
                                                                     panier</span></a>
                                                         </div><!-- End .product-action -->
                                                     <?php } ?>
@@ -311,15 +320,33 @@ require('./assets/componants/header.php');
                     top: 0; */
                     background-color: red;
                     height: 100px;
-                    z-index: 5;
+
                     margin-bottom: 2rem;
 
 
                 }
 
-                #Starter {
-                    background-image: url(./assets/images/miso2.jpg);
+                .categorydiv {
+                    position: relative;
+                }
 
+                .ttttt {
+                    position: absolute;
+                    top: 0;
+                    color: white;
+                    display: flex;
+                    justify-content: center;
+                    align-items: center;
+                    width: 100%;
+                    height: 100%;
+                    font-size: 30px;
+
+                }
+
+                .imageZHZH {
+                    background-image: url(./assets/images/sushilandscape.jpg);
+                    height: 100%;
+                    filter: grayscale(55%) blur(1px) brightness(65%);
                     background-size: cover;
                     background-position: center;
                 }
@@ -332,6 +359,7 @@ require('./assets/componants/header.php');
                     flex-flow: row nowrap;
                     justify-content: space-between;
                     align-items: center;
+                    z-index: 2;
                 }
 
                 .lesCategdebg a {
@@ -340,6 +368,10 @@ require('./assets/componants/header.php');
                     min-width: 145px;
                     color: white;
 
+                }
+
+                .testshadow {
+                    text-shadow: 1px 2px rgb(0 0 0 / 25%);
                 }
             </style>
 
@@ -386,56 +418,67 @@ require('./assets/componants/header.php');
                     <div class="container">
                         <div class="modeNormal">
                             <div class="products mb-3">
-                                <?php foreach ($lesCategory as $c) { ?>
-                                    <div class="classement">
-                                        <div id="<?= $c['label'] ?>" class="categorydiv" class="my-5">
-                                            <?= $c['label'] ?>
+                                <?php foreach ($lesCategory as $c) {
+                                    $lesmenus = test($c['id']);
+                                    if ($lesmenus) {
+                                ?>
+
+                                        <div class="classement">
+                                            <div id="<?= $c['label'] ?>" class="categorydiv" class="my-5">
+                                                <div class="imageZHZH">
+
+                                                </div>
+                                                <div class="testshadow ttttt">
+                                                    <?= $c['label'] ?>
+                                                </div>
+
+                                            </div>
+
+                                            <div class="row page-section justify-content-start">
+
+                                                <?php
+                                                foreach ($lesmenus as $mm) {
+
+                                                ?>
+                                                    <div class="col-6 col-md-4 col-lg-4 col-xl-3">
+                                                        <div class="product product-7 text-center">
+                                                            <figure class="product-media">
+                                                                <!-- <span class="product-label label-new">New</span> -->
+                                                                <a href="product.php?id=<?= htmlspecialchars($mm['id']) ?>">
+                                                                    <img src="./sysadmin/html/assets/uploads/petite<?= htmlspecialchars($mm['image']) ?>" alt="Product image" class="product-image">
+                                                                </a>
+
+
+                                                                <div class="product-action">
+                                                                    <a href="./panier/addpanier.php?id=<?= htmlspecialchars($mm['id']) ?>" class="addPanier btn-product btn-cart"><span class="compteParProduit">Ajouter au panier <?php
+                                                                                                                                                                                                                                    if (!empty($_SESSION['panier'][$mm['id']])) {
+                                                                                                                                                                                                                                        echo  $_SESSION['panier'][$mm['id']];
+                                                                                                                                                                                                                                    }
+                                                                                                                                                                                                                                    ?>
+                                                                        </span></a>
+                                                                </div><!-- End .product-action -->
+                                                            </figure><!-- End .product-media -->
+
+                                                            <div class="product-body">
+                                                                <div class="product-cat">
+                                                                    <a href="#"><?= htmlspecialchars($c['label']) ?></a>
+                                                                </div><!-- End .product-cat -->
+                                                                <h3 class="product-title couleurBlanche"><a href="product.html"><?= htmlspecialchars($mm['name']) ?></a></h3><!-- End .product-title -->
+                                                                <div class="product-price couleurJaune">
+                                                                    <?= htmlspecialchars($mm['price']) ?> €
+                                                                </div><!-- End .product-price -->
+
+                                                            </div><!-- End .product-body -->
+                                                        </div><!-- End .product -->
+                                                    </div><!-- End .col-sm-6 col-lg-4 col-xl-3 -->
+
+                                                <?php
+                                                }
+                                                ?>
+                                            </div><!-- End .row -->
                                         </div>
-
-                                        <div class="row page-section justify-content-start">
-
-                                            <?php $lesmenus = test($c['id']);
-                                            foreach ($lesmenus as $mm) {
-
-                                            ?>
-                                                <div class="col-6 col-md-4 col-lg-4 col-xl-3">
-                                                    <div class="product product-7 text-center">
-                                                        <figure class="product-media">
-                                                            <!-- <span class="product-label label-new">New</span> -->
-                                                            <a href="product.php?id=<?= htmlspecialchars($mm['id']) ?>">
-                                                                <img src="./sysadmin/html/assets/uploads/petite<?= htmlspecialchars($mm['image']) ?>" alt="Product image" class="product-image">
-                                                            </a>
-
-
-                                                            <div class="product-action">
-                                                                <a href="./panier/addpanier.php?id=<?= htmlspecialchars($mm['id']) ?>" class="addPanier btn-product btn-cart"><span class="compteParProduit">Ajouter au panier <?php
-                                                                                                                                                                                                                                if (!empty($_SESSION['panier'][$mm['id']])) {
-                                                                                                                                                                                                                                    echo  $_SESSION['panier'][$mm['id']];
-                                                                                                                                                                                                                                }
-                                                                                                                                                                                                                                ?>
-                                                                    </span></a>
-                                                            </div><!-- End .product-action -->
-                                                        </figure><!-- End .product-media -->
-
-                                                        <div class="product-body">
-                                                            <div class="product-cat">
-                                                                <a href="#"><?= htmlspecialchars($c['label']) ?></a>
-                                                            </div><!-- End .product-cat -->
-                                                            <h3 class="product-title couleurBlanche"><a href="product.html"><?= htmlspecialchars($mm['name']) ?></a></h3><!-- End .product-title -->
-                                                            <div class="product-price couleurJaune">
-                                                                <?= htmlspecialchars($mm['price']) ?> €
-                                                            </div><!-- End .product-price -->
-
-                                                        </div><!-- End .product-body -->
-                                                    </div><!-- End .product -->
-                                                </div><!-- End .col-sm-6 col-lg-4 col-xl-3 -->
-
-                                            <?php
-                                            }
-                                            ?>
-                                        </div><!-- End .row -->
-                                    </div>
-                                <?php } ?>
+                                <?php }
+                                } ?>
 
                             </div><!-- End .products -->
 
@@ -543,7 +586,7 @@ require('./assets/componants/header.php');
             $cache.css({
                 'position': 'fixed',
                 'top': '0px',
-                'z-index': 5,
+                'z-index': 2,
                 'height': '60px',
                 'background': '#181616',
                 'width': '100%'
